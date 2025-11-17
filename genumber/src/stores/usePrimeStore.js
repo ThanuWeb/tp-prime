@@ -1,14 +1,7 @@
-import {create} from "zustand";
+import { create } from "zustand";
 import { isPrime } from "../service/verifIsPrime";
 
-/**
- 
-Store Zustand orienté métier :
-current: { number: number | null, isPrime: boolean | null }
-displayMode: "compact" | "full"
-actions: setNumber, setDisplayMode, clear
-*
-Important : ce store ne contient aucune logique réseau ni dépendance à React Query.*/
+/* Ici on crée un petit "store" avec Zustand. Il sert juste à garder un nombre, dire s’il est premier,et gérer comment on affiche les infos.Les fonctions (setNumber, clear, setDisplayMode) permettent de changer ces valeurs facilement dans nos composants React.*/
 
 export const usePrimeStore = create((set) => ({
   current: { number: null, isPrime: null },

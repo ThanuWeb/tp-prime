@@ -7,15 +7,15 @@ import { inputNumberSchema } from "../schemas/numberSchema";
 
 /**
  * Page /primes
- * - utilise usePrimeAlea (React Query) pour récupérer le nombre simulé
- * - met à jour le store Zustand UNIQUEMENT depuis un useEffect (évite loop)
- * - propose un formulaire pour tester un nombre manuel (validation Zod)
+  - usePrimeAlea pour récupérer le nombre simulé
+  - met à jour le store Zustand depuis un useEffect
+  - propose un formulaire pour tester un nombre manuel (Zod)
  */
 
 export default function PrimesPage() {
   const query = usePrimeAlea();
 
-  // selectors stables : on récupère uniquement ce dont on a besoin
+  // on récupère uniquement ce dont on a besoin
   const setNumber = usePrimeStore((s) => s.setNumber);
   const clear = usePrimeStore((s) => s.clear);
   const currentNumber = usePrimeStore((s) => s.current.number);
@@ -23,7 +23,7 @@ export default function PrimesPage() {
   const [input, setInput] = useState("");
   const [error, setError] = useState(null);
 
-  // Quand la query réussit et que le nombre est différent du store, on met à jour le store.
+  // Quand le nombre est différent du store, on met à jour le store.
   useEffect(() => {
     if (query.isSuccess && query.data?.number != null) {
       const n = query.data.number;
@@ -32,8 +32,7 @@ export default function PrimesPage() {
         setNumber(n);
       }
     }
-    // On ne dépend volontairement QUE de query.data?.number pour éviter des re-renders inutiles
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // On ne dépend de query.data?.number pour éviter des re-renders inutiles
   }, [query.data?.number]);
 
   const handleFetch = async () => {
@@ -59,7 +58,7 @@ export default function PrimesPage() {
       if (currentNumber !== parsed) setNumber(parsed);
       setInput("");
     } catch (zerr) {
-      // zod fournit un tableau errors — on affiche un message lisible
+      // zod fournit un tableau errors,affiche un message lisible
       const message =
         zerr?.errors?.[0]?.message ??
         (zerr?.message ? String(zerr.message) : "Nombre invalide");
@@ -113,7 +112,7 @@ export default function PrimesPage() {
             className="border p-2 rounded flex-1 text-color-black-500 bg-indigo-900"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Entrez un entier (ex: 17)"
+            placeholder="Entrez un nombre"
             inputMode="numeric"
             
           />
@@ -122,15 +121,7 @@ export default function PrimesPage() {
         {error && <p className="text-red-500 mt-2">{error}</p>}
       </form>
 
-      <div className="text-sm text-gray-600">
-        Notes :
-        <ul className="list-disc ml-5 mt-2">
-          <li>L'API simulée est validée par Zod — si elle renvoie une valeur hors plage, la
-          requête passe en erreur.</li>
-          <li>Le store Zustand ne contient aucune logique réseau — il ne stocke que le nombre et le résultat (isPrime).</li>
-          <li>Les updates du store provoquées par la query sont faites dans useEffect pour éviter les boucles d'update.</li>
-        </ul>
-      </div>
+
     </div>
   );
 }

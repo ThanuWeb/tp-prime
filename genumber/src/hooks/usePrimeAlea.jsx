@@ -6,15 +6,15 @@ export function usePrimeAlea() {
     queryKey: ["numberAlea"],
     queryFn: async () => {
       try {
-        const res = await fetchNumberAlea(); // fetchNumberAlea peut throw si Zod échoue
+        const res = await fetchNumberAlea(); 
         return res; // objet validé { number }
       } catch (err) {
-        // améliorer le message d'erreur pour l'UI
+        // le message d'erreur pour l'UI
         const message = err?.message || "Erreur inconnue lors de la récupération du nombre";
         // lancer l'erreur pour que React Query passe en isError
         throw new Error(`API simulée invalide : ${message}`);
       }
     },
-    retry: 0, // évite multiples retries si la validation échoue souvent
+    retry: 0, // évite multiples tentatives si la validation échoue souvent
   });
 }

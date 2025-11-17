@@ -1,6 +1,6 @@
-/**
- * Fonction métier pour vérifier si un entier strictement positif est premier.
- * Complexité optimisée : on teste 2 puis les impairs jusqu'à sqrt(n).
+/*
+ - Fonction pour vérifier si un entier strictement positif est premier.
+  -on teste 2 puis les impairs jusqu'à sqrt(n).
  */
 
 export function isPrime(n) {
