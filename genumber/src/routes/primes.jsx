@@ -1,14 +1,9 @@
- import { createFileRoute } from '@tanstack/react-router'
- 
- export const Route = createFileRoute('/')({
-   component: Prime,
- })
- 
- function Prime() {
-   return (
-     <div className="p-2">
-       
-       
-     </div>
-   )
- }
+import React from "react";
+import PrimesPage from "../pages/PrimesPage";
+
+/**
+ * Wrapper route pour /primes
+ */
+export default function PrimesRoute() {
+  return <PrimesPage />;
+}

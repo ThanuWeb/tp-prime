@@ -1,21 +1,16 @@
-import { createRootRoute, Link, Outlet } from '@tanstack/react-router'
-import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
+import React from "react";
 
-const RootLayout = () => (
-  <>
-    <div className="p-2 flex gap-2">
-      <Link to="/" className="[&.active]:font-bold">
-        Acceuil
-      </Link>{' '}
+/**
+ * Layout racine — contient une barre simple
+ */
+export default function RootLayout({ children }) {
+  return (
+    <div className="min-h-screen bg-gray-50">
+      <header className="bg-indigo-600 text-white p-4">
+        <div className="max-w-6xl mx-auto">TP — Générateur de nombres premiers</div>
+      </header>
 
-       <Link to="/primes" className="[&.active]:font-bold">
-        Primes
-      </Link>
+      <main className="max-w-6xl mx-auto py-8">{children}</main>
     </div>
-    <hr />
-    <Outlet />
-    <TanStackRouterDevtools />
-  </>
-)
-
-export const Route = createRootRoute({ component: RootLayout })
+  );
+}
