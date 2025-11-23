@@ -1,5 +1,6 @@
 import React, { useMemo } from "react";
 import { usePrimeStore } from "../stores/usePrimeStore";
+import '../App.css';
 
 //Evite des re-renders inutiles avec useMemo().
 

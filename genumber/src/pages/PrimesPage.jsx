@@ -82,7 +82,8 @@ export default function PrimesPage() {
   }, [query.isError, query.error]);
 
   return (
-    <div className="max-w-3xl mx-auto p-6">
+    
+    <div className="max-w-3xl mx-auto p-6 ">
       <h2 className="text-2xl font-bold mb-4">Générateur de nombres premiers</h2>
 
       <div className="mb-4 flex gap-3 items-center">
@@ -118,7 +119,6 @@ export default function PrimesPage() {
           />
           <Button type="submit">Tester</Button>
         </div>
-        {error && <p className="text-red-500 mt-2">{error}</p>}
       </form>
 
 
